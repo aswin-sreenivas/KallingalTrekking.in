@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { StatsCounter } from './components/StatsCounter';
@@ -169,6 +170,9 @@ export default function App() {
       <FloatingWhatsAppButton
         onOpenBookingModal={handleOpenBookingModal}
       />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
