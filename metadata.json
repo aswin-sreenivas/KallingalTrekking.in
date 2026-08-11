@@ -1,0 +1,6 @@
+{
+  "name": "Kallingal Trekking",
+  "description": "Official website for Kallingal Trekking in Banasura Hills, Wayanad, Kerala — Adventure Tourism & Trekking experience with direct WhatsApp bookings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
