@@ -1,7 +1,6 @@
 import React from 'react';
 import { CheckCircle2, ShieldCheck, MapPin, Sparkles, Navigation } from 'lucide-react';
 import banasuraPeakImg from '../assets/images/banasura_peak_1784836264060.jpg';
-import sunriseRidgeImg from '../assets/images/sunrise_ridge_1784836289711.jpg';
 
 interface AboutProps {
   onOpenBookingModal: () => void;
@@ -32,13 +31,18 @@ export const AboutSection: React.FC<AboutProps> = ({ onOpenBookingModal }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           <h2 className="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-[#0D47A1] tracking-tight">
-            Kerala’s Premier Adventure Tourism Experience
+            Banasura Hills, Wayanad – More About the Destination
           </h2>
-          <p className="mt-3 sm:mt-4 text-xs sm:text-lg text-gray-600 leading-relaxed">
-            Rooted at the base of Banasura Hills in Wayanad, Kallingal Trekking delivers authentic, safe, and exhilarating mountain expeditions tailored for adventurers, families, and nature lovers.
-          </p>
+          <div className="mt-3 sm:mt-5 text-xs sm:text-lg text-gray-600 leading-relaxed space-y-3">
+            <p>
+              Banasura Hills is one of the most beautiful and naturally diverse mountain regions in Wayanad, Kerala. Located in the Western Ghats, the area is known for its impressive mountain landscapes, lush greenery, mist-covered peaks, open grasslands, dense forest areas and rugged rocky terrain.
+            </p>
+            <p>
+              The hills offer a constantly changing landscape as you travel higher. During clear weather, visitors can enjoy wide panoramic views of the surrounding valleys, mountains, villages and Banasura Sagar Dam. During the monsoon and misty seasons, the hills take on a completely different character, with clouds and fog moving across the mountain slopes.
+            </p>
+          </div>
         </div>
 
         {/* Content Grid */}
@@ -61,20 +65,6 @@ export const AboutSection: React.FC<AboutProps> = ({ onOpenBookingModal }) => {
                 <h3 className="font-heading font-bold text-xl sm:text-2xl mt-2">
                   Banasura Hills, Wayanad
                 </h3>
-              </div>
-            </div>
-
-            {/* Overlapping Secondary Card */}
-            <div className="hidden sm:block absolute -bottom-8 -right-6 z-20 w-64 rounded-2xl overflow-hidden shadow-2xl border-4 border-white glass-panel p-2">
-              <img
-                src={sunriseRidgeImg}
-                alt="Sunrise Ridge"
-                className="w-full h-32 object-cover rounded-xl"
-                referrerPolicy="no-referrer"
-              />
-              <div className="p-3">
-                <p className="font-heading font-bold text-xs text-[#0D47A1]">Sunrise Above Clouds</p>
-                <p className="text-[11px] text-gray-500">Every morning at 5:00 AM</p>
               </div>
             </div>
 
