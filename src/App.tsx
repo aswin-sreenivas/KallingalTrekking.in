@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { StatsCounter } from './components/StatsCounter';
 import { AboutSection } from './components/AboutSection';
 import { PackagesSection } from './components/PackagesSection';
 import { WeatherTrailWidget } from './components/WeatherTrailWidget';
@@ -105,9 +104,6 @@ export default function App() {
           onOpenBookingModal={handleOpenBookingModal}
           onNavigate={handleNavigate}
         />
-
-        {/* Quick Stats Bar */}
-        <StatsCounter />
 
         {/* About Section */}
         <AboutSection
