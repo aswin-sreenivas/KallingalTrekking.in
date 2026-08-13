@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, CheckCircle, Quote, ExternalLink, MapPin } from 'lucide-react';
+import { Star, CheckCircle, Quote, ExternalLink, MapPin, PlusCircle, X, Send, Sparkles } from 'lucide-react';
 import { REVIEWS, Review } from '../data/reviews';
 
 interface GoogleReviewsData {
@@ -11,7 +11,7 @@ interface GoogleReviewsData {
 }
 
 export const ReviewsSection: React.FC = () => {
-  const defaultMapsUrl = "https://maps.app.goo.gl/CWmoy9DoVXJ14HwZ7";
+  const defaultMapsUrl = "https://share.google/8WJFqP2LC7ennkAdx";
   const [reviewsData, setReviewsData] = useState<GoogleReviewsData>({
     placeName: "Kallingal Trekking, Banasura Hills",
     rating: 4.9,
@@ -19,9 +19,19 @@ export const ReviewsSection: React.FC = () => {
     googleMapsUrl: defaultMapsUrl,
     reviews: REVIEWS
   });
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filterRating, setFilterRating] = useState<number | 'all'>('all');
+  const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitSuccessMsg, setSubmitSuccessMsg] = useState<string>('');
 
-  useEffect(() => {
+  // Form states
+  const [authorName, setAuthorName] = useState<string>('');
+  const [authorLocation, setAuthorLocation] = useState<string>('');
+  const [selectedRating, setSelectedRating] = useState<number>(5);
+  const [selectedPackage, setSelectedPackage] = useState<string>('Banasura Hills Views Jeep Trekking');
+  const [commentText, setCommentText] = useState<string>('');
+
+  const fetchLiveReviews = () => {
     fetch('/api/google-reviews')
       .then((res) => {
         if (!res.ok) throw new Error('API offline');
@@ -33,25 +43,75 @@ export const ReviewsSection: React.FC = () => {
             placeName: data.placeName || "Kallingal Trekking, Banasura Hills",
             rating: data.rating || 4.9,
             userRatingsTotal: data.userRatingsTotal || 520,
-            googleMapsUrl: data.googleMapsUrl || defaultMapsUrl,
+            googleMapsUrl: defaultMapsUrl,
             reviews: data.reviews
           });
         }
       })
       .catch((_err) => {
         // Fallback to default REVIEWS if fetch fails
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchLiveReviews();
   }, []);
 
+  const handleReviewSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!authorName.trim() || !commentText.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: authorName,
+          location: authorLocation || 'Verified Wayanad Visitor',
+          rating: selectedRating,
+          packageTaken: selectedPackage,
+          comment: commentText
+        })
+      });
+
+      const resData = await response.json();
+      if (resData.success && resData.updatedStats) {
+        setReviewsData({
+          placeName: "Kallingal Trekking, Banasura Hills",
+          rating: resData.updatedStats.rating,
+          userRatingsTotal: resData.updatedStats.userRatingsTotal,
+          googleMapsUrl: defaultMapsUrl,
+          reviews: resData.updatedStats.reviews
+        });
+        setSubmitSuccessMsg('Thank you! Your review has been published in real-time.');
+        setAuthorName('');
+        setAuthorLocation('');
+        setCommentText('');
+        setSelectedRating(5);
+        setTimeout(() => {
+          setIsWriteModalOpen(false);
+          setSubmitSuccessMsg('');
+        }, 1800);
+      }
+    } catch (err) {
+      console.error('Failed to submit review:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const filteredReviews = reviewsData.reviews.filter((r) => {
+    if (filterRating === 'all') return true;
+    return r.rating === filterRating;
+  });
+
   return (
-    <section id="reviews" className="py-20 lg:py-28 bg-white">
+    <section id="reviews" className="py-20 lg:py-28 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header & Google Rating Counter Badge */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           {/* Google Maps Official Rating Banner */}
           <div className="inline-flex flex-wrap items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-blue-50/90 text-[#0D47A1] font-heading text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100 shadow-sm">
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
@@ -78,17 +138,17 @@ export const ReviewsSection: React.FC = () => {
                 <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <span className="text-blue-800">({reviewsData.userRatingsTotal}+ Google Maps Reviews)</span>
+            <span className="text-blue-800">({reviewsData.userRatingsTotal}+ Verified Reviews)</span>
           </div>
 
           <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#0D47A1] tracking-tight">
-            Verified Google Reviews
+            Real-Time Google & Trekker Reviews
           </h2>
           <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">
-            Automated feedback synced directly from our official Google Maps profile. See what real trekkers say about summiting Banasura Hills with Kallingal Trekking.
+            Real feedback synced live from our official Google profile and real-time trekker submissions.
           </p>
 
-          {/* Action Buttons: View on Google Maps & Write Review */}
+          {/* Action Buttons */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
               href={reviewsData.googleMapsUrl}
@@ -100,21 +160,53 @@ export const ReviewsSection: React.FC = () => {
               <span>View On Google Maps</span>
               <ExternalLink className="w-3.5 h-3.5 text-blue-200" />
             </a>
+            <button
+              onClick={() => setIsWriteModalOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-heading font-bold text-xs uppercase tracking-wider hover:bg-amber-400 transition-colors shadow-sm cursor-pointer"
+            >
+              <PlusCircle className="w-4 h-4 text-slate-950" />
+              <span>Write Real-Time Review</span>
+            </button>
             <a
               href={reviewsData.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-heading font-bold text-xs uppercase tracking-wider hover:bg-amber-400 transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-100 text-gray-700 font-heading font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors border border-gray-200"
             >
-              <Star className="w-4 h-4 fill-slate-950" />
-              <span>Write a Google Review</span>
+              <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+              <span>Review on Google</span>
             </a>
+          </div>
+
+          {/* Filter Pills */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+            <button
+              onClick={() => setFilterRating('all')}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                filterRating === 'all'
+                  ? 'bg-[#0D47A1] text-white shadow'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              All Reviews ({reviewsData.reviews.length})
+            </button>
+            <button
+              onClick={() => setFilterRating(5)}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1 ${
+                filterRating === 5
+                  ? 'bg-[#0D47A1] text-white shadow'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <span>5 Stars</span>
+              <Star className="w-3 h-3 fill-amber-400 text-amber-400 inline" />
+            </button>
           </div>
         </div>
 
         {/* Reviews Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviewsData.reviews.map((review) => (
+          {filteredReviews.map((review) => (
             <div
               key={review.id}
               className="bg-[#F8FAFC] rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-200 border border-blue-50 flex flex-col justify-between relative group"
@@ -146,7 +238,7 @@ export const ReviewsSection: React.FC = () => {
                   </span>
                   <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                     <CheckCircle className="w-3 h-3 text-emerald-600" />
-                    <span>Google Maps</span>
+                    <span>Verified</span>
                   </span>
                 </div>
 
@@ -174,20 +266,145 @@ export const ReviewsSection: React.FC = () => {
         {/* Bottom Google Review Note & Direct Link */}
         <div className="mt-12 text-center flex flex-col items-center gap-2">
           <p className="text-xs text-gray-500 font-medium max-w-lg">
-            ★ Automated ratings & reviews fetched directly from the official Google Maps profile for Kallingal Trekking, Wayanad.
+            ★ Automated ratings & reviews fetched directly from the official Google listing for Kallingal Trekking, Wayanad.
           </p>
           <a
             href={reviewsData.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-bold text-[#0D47A1] hover:underline inline-flex items-center gap-1"
+            className="text-xs font-bold text-[#0D47A1] hover:underline inline-flex items-center gap-1 bg-blue-50 px-3.5 py-2 rounded-xl border border-blue-100"
           >
-            <span>https://maps.app.goo.gl/CWmoy9DoVXJ14HwZ7</span>
-            <ExternalLink className="w-3 h-3" />
+            <span>{reviewsData.googleMapsUrl}</span>
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
 
       </div>
+
+      {/* Real-Time Review Modal */}
+      {isWriteModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative border border-blue-100">
+            <button
+              onClick={() => setIsWriteModalOpen(false)}
+              className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-2 text-[#0D47A1]">
+              <Sparkles className="w-5 h-5 text-amber-500 fill-amber-500" />
+              <span className="text-xs font-bold uppercase tracking-wider">Live Review Submission</span>
+            </div>
+
+            <h3 className="text-xl font-heading font-extrabold text-gray-900 mb-1">
+              Share Your Trek Experience
+            </h3>
+            <p className="text-xs text-gray-500 mb-6">
+              Your feedback will be published immediately to our live review section.
+            </p>
+
+            {submitSuccessMsg ? (
+              <div className="p-4 bg-emerald-50 text-emerald-800 rounded-2xl border border-emerald-200 text-center font-bold text-sm flex items-center justify-center gap-2">
+                <CheckCircle className="w-5 h-5 text-emerald-600" />
+                <span>{submitSuccessMsg}</span>
+              </div>
+            ) : (
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Your Name *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Rahul Sharma"
+                    value={authorName}
+                    onChange={(e) => setAuthorName(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0D47A1]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Your City / Location</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Kozhikode, Kerala"
+                    value={authorLocation}
+                    onChange={(e) => setAuthorLocation(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0D47A1]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Star Rating</label>
+                  <div className="flex items-center gap-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        type="button"
+                        key={star}
+                        onClick={() => setSelectedRating(star)}
+                        className="p-1 focus:outline-none"
+                      >
+                        <Star
+                          className={`w-7 h-7 transition-colors ${
+                            star <= selectedRating
+                              ? 'fill-amber-400 text-amber-400'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      </button>
+                    ))}
+                    <span className="text-xs font-bold text-gray-600 ml-2">{selectedRating} / 5 Stars</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Package Experienced</label>
+                  <select
+                    value={selectedPackage}
+                    onChange={(e) => setSelectedPackage(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0D47A1]"
+                  >
+                    <option value="Banasura Hills Views Jeep Trekking">Banasura Hills Views Jeep Trekking</option>
+                    <option value="Sunrise Ridge & Cloud Sea Trek">Sunrise Ridge & Cloud Sea Trek</option>
+                    <option value="Overnight Peak Camping & Expedition">Overnight Peak Camping & Expedition</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Review / Comment *</label>
+                  <textarea
+                    required
+                    rows={3}
+                    placeholder="Tell us about the jeep trail, views, and guide experience..."
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0D47A1]"
+                  />
+                </div>
+
+                <div className="pt-2 flex items-center justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsWriteModalOpen(false)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-100"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0D47A1] text-white font-heading font-bold text-xs uppercase tracking-wider hover:bg-blue-800 transition-colors shadow disabled:opacity-50 cursor-pointer"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>{isSubmitting ? 'Publishing...' : 'Publish Real-Time Review'}</span>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 };
+
