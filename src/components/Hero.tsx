@@ -100,11 +100,6 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           Banasura Hills Views <span className="text-blue-300">Jeep Trekking</span> & Safari
         </h1>
 
-        {/* Subtitle */}
-        <p className="mt-3 sm:mt-5 text-xs sm:text-base md:text-lg lg:text-xl text-blue-100/90 max-w-2xl font-light leading-relaxed drop-shadow-sm px-1">
-          Experience the thrill of Banasura Hills with a private 4x4 jeep, exciting off-road trails, and breathtaking hilltop views—all at an affordable group price of <strong className="font-semibold text-white">₹2,500 Per Jeep</strong> for 6–8 people.
-        </p>
-
         {/* Call to Action Button */}
         <div className="mt-6 sm:mt-8 flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 w-full xs:w-auto px-2 sm:px-0">
           <button
