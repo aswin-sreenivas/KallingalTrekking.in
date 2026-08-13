@@ -240,4 +240,3 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onOpenBookingM
     </section>
   );
 };
-
