@@ -51,7 +51,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onOpenBookingM
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
             <h2 className="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-[#0D47A1] tracking-tight">
-              Banasura Jeep Safari & Hilltop Trek
+              Banasura Hills Views Jeep Trekking
             </h2>
             <p className="mt-3 sm:mt-4 text-xs sm:text-lg text-gray-600 leading-relaxed font-light">
               Ride in a private 4x4 Jeep through rugged mountain trails, conquer exciting mud tracks, and enjoy a short guided trek to a breathtaking hilltop viewpoint.
@@ -115,7 +115,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onOpenBookingM
                   </div>
                   <div className="bg-blue-50/80 p-3 rounded-2xl border border-blue-100">
                     <span className="text-[10px] uppercase font-bold text-gray-500 block">Capacity</span>
-                    <span className="text-xs sm:text-sm font-bold text-[#0D47A1]">6–8 People</span>
+                    <span className="text-xs sm:text-sm font-bold text-[#0D47A1]">{SINGLE_PACKAGE.capacity}</span>
                   </div>
                   <div className="bg-blue-50/80 p-3 rounded-2xl border border-blue-100 col-span-2 sm:col-span-1">
                     <span className="text-[10px] uppercase font-bold text-gray-500 block">Vehicle</span>
