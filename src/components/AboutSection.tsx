@@ -33,7 +33,7 @@ export const AboutSection: React.FC<AboutProps> = ({ onOpenBookingModal }) => {
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           <h2 className="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-[#0D47A1] tracking-tight">
-            Banasura Hills – More About the Destination
+            Banasura Hills, Wayanad – More About the Destination
           </h2>
           <div className="mt-3 sm:mt-5 text-xs sm:text-lg text-gray-600 leading-relaxed space-y-3">
             <p>
@@ -74,11 +74,6 @@ export const AboutSection: React.FC<AboutProps> = ({ onOpenBookingModal }) => {
 
           {/* Text & Features */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 text-[#0D47A1] text-xs font-semibold">
-              <MapPin className="w-4 h-4 text-[#1565C0]" />
-              <span>Location: Padinjarathara, Wayanad, Kerala</span>
-            </div>
-
             <h3 className="font-heading font-bold text-2xl sm:text-3xl text-gray-900 leading-snug">
               Why Kallingal Trekking Is The #1 Choice For Banasura Expeditions
             </h3>
