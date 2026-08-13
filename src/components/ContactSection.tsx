@@ -90,21 +90,6 @@ Please get back to me regarding date availability and Jeep Safari details.`;
                   </div>
                 </a>
 
-                <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-white/10 hover:bg-white/20 transition-colors border border-white/15 group">
-                  <div className="p-3 rounded-xl bg-blue-600 text-white shrink-0 shadow-md">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-blue-200 block">Official Email</span>
-                    <a
-                      href="mailto:kallingaltrekking@gmail.com"
-                      className="font-heading font-bold text-sm text-white group-hover:text-blue-200 transition-colors break-all"
-                    >
-                      kallingaltrekking@gmail.com
-                    </a>
-                  </div>
-                </div>
-
                 <div className="flex items-center gap-4 p-3.5 rounded-2xl bg-white/10 border border-white/15">
                   <div className="p-3 rounded-xl bg-blue-700/60 text-blue-200 shrink-0">
                     <MapPin className="w-5 h-5" />
@@ -229,16 +214,12 @@ Please get back to me regarding date availability and Jeep Safari details.`;
                   className="w-full h-full"
                 />
               </div>
-              <div className="p-3 flex items-center justify-between text-xs text-gray-600 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-[#1565C0]" />
-                  <span>Padinjarathara, Banasura Sagar, Wayanad</span>
-                </span>
+              <div className="p-3 flex items-center justify-end text-xs text-gray-600 font-medium">
                 <a
                   href="https://maps.google.com/?q=11.703624,75.944946"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#0D47A1] font-bold hover:underline"
+                  className="text-[#0D47A1] font-bold hover:underline flex items-center gap-1"
                 >
                   Open in Google Maps →
                 </a>
