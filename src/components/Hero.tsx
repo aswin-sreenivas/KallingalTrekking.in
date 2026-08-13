@@ -51,7 +51,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
     <section id="home" className="relative w-full min-h-[100dvh] py-16 sm:py-20 md:py-28 overflow-hidden flex flex-col items-center justify-center">
       {/* Background Video Player */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#0D47A1]">
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-slate-950">
         <video
           ref={videoRef}
           src={HERO_VIDEO_SOURCE}
@@ -61,14 +61,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           playsInline
           poster={heroBanasuraImg}
           onError={() => setHasVideoError(true)}
-          className="w-full h-full object-cover scale-105 filter brightness-90 transition-opacity duration-1000"
+          className="w-full h-full object-cover scale-105 filter brightness-95 transition-opacity duration-1000"
         >
           <source src={HERO_VIDEO_SOURCE} type="video/mp4" />
         </video>
 
-        {/* Dark Blue Minimal Overlay Filter */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0D47A1] via-[#0D47A1]/70 to-black/60 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D47A1]/85 via-transparent to-[#0D47A1]/50" />
+        {/* Neutral Dark Overlay Filter (No Blue Tint) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
       {/* Video Control Bar (Bottom-Left) */}
@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
         {/* Main Heading */}
         <h1 className="font-heading font-extrabold text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight sm:leading-[1.1] text-white drop-shadow-md max-w-4xl px-1">
-          Banasura Hills Views <span className="text-blue-300">Jeep Trekking</span> & Safari
+          Banasura Hills Views <span className="text-amber-400">Jeep Trekking</span> & Safari
         </h1>
 
         {/* Call to Action Button */}
