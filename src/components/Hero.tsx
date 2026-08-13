@@ -66,7 +66,10 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <source src={HERO_VIDEO_SOURCE} type="video/mp4" />
         </video>
 
-    
+        {/* Neutral Dark Overlay Filter (No Blue Tint) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
 
       {/* Video Control Bar (Bottom-Left) */}
       <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 z-20 flex items-center gap-1.5 sm:gap-2">
@@ -94,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
         {/* Main Heading */}
         <h1 className="font-heading font-extrabold text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight sm:leading-[1.1] text-white drop-shadow-md max-w-4xl px-1">
-          Banasura Hills Views <span className="text-blue-300">Jeep Trekking</span>
+          Banasura Hills Views <span className="text-blue-300">Jeep Trekking</span> & Safari
         </h1>
 
         {/* Call to Action Button */}
