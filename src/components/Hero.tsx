@@ -66,10 +66,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <source src={HERO_VIDEO_SOURCE} type="video/mp4" />
         </video>
 
-        {/* Neutral Dark Overlay Filter (No Blue Tint) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/20" />
-        <div className="absolute inset-0 bg-black/20" />
-      </div>
+    
 
       {/* Video Control Bar (Bottom-Left) */}
       <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 z-20 flex items-center gap-1.5 sm:gap-2">
