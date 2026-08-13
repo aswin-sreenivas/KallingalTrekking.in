@@ -189,9 +189,6 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onOpenBookingM
                 className="bg-white p-5 sm:p-6 rounded-3xl border border-blue-50 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-1"
               >
                 <div>
-                  <div className="p-3 rounded-2xl bg-blue-50 w-fit text-[#0D47A1] mb-4 group-hover:bg-[#0D47A1] group-hover:text-white transition-colors duration-300">
-                    {getIcon(item.iconName)}
-                  </div>
                   <h3 className="font-heading font-bold text-base sm:text-lg text-gray-900 group-hover:text-[#0D47A1] transition-colors">
                     {item.title}
                   </h3>

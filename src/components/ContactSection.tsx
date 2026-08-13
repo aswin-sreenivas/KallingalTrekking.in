@@ -71,9 +71,6 @@ Please get back to me regarding date availability and Jeep Safari details.`;
             {/* Primary Info Card */}
             <div className="bg-[#0D47A1] text-white rounded-3xl p-8 shadow-xl space-y-6 relative overflow-hidden">
               <h3 className="font-heading font-bold text-2xl">Official Contact Channels</h3>
-              <p className="text-xs text-blue-100/90 leading-relaxed">
-                Reach out to us anytime for trek date availability, weather updates, resort pickup arrangements, or custom group planning.
-              </p>
 
               <div className="space-y-4 pt-2">
                 <a
@@ -87,21 +84,6 @@ Please get back to me regarding date availability and Jeep Safari details.`;
                   </div>
                   <div>
                     <span className="text-[10px] uppercase font-bold text-blue-200 block">WhatsApp Booking & Inquiry</span>
-                    <span className="font-heading font-bold text-base text-white group-hover:text-blue-200 transition-colors">
-                      +91 70342 45415
-                    </span>
-                  </div>
-                </a>
-
-                <a
-                  href="tel:+917034245415"
-                  className="flex items-center gap-4 p-3.5 rounded-2xl bg-white/10 hover:bg-white/20 transition-colors border border-white/15 group"
-                >
-                  <div className="p-3 rounded-xl bg-[#1565C0] text-white shrink-0 shadow-md">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-blue-200 block">Direct Helpline Call</span>
                     <span className="font-heading font-bold text-base text-white group-hover:text-blue-200 transition-colors">
                       +91 70342 45415
                     </span>
@@ -142,7 +124,7 @@ Please get back to me regarding date availability and Jeep Safari details.`;
                   <div>
                     <span className="text-[10px] uppercase font-bold text-blue-200 block">Operating Hours</span>
                     <span className="font-heading font-semibold text-sm text-white">
-                      Monday – Sunday: 6:00 AM – 8:00 PM
+                      Monday – Sunday: 5:30 AM – 6:00 PM
                     </span>
                   </div>
                 </div>
@@ -152,13 +134,13 @@ Please get back to me regarding date availability and Jeep Safari details.`;
               <div className="pt-4 border-t border-white/15 flex items-center justify-between text-xs text-blue-200">
                 <span>Follow us for trail updates:</span>
                 <a
-                  href="https://instagram.com"
+                  href="https://instagram.com/kallingaltrekking"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold transition-colors"
                 >
                   <Instagram className="w-4 h-4 text-pink-300" />
-                  <span>Instagram</span>
+                  <span>@kallingaltrekking</span>
                 </a>
               </div>
 

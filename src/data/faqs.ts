@@ -16,7 +16,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 'f2',
     category: 'Booking',
     question: 'How much does the package cost?',
-    answer: 'The rate is flat ₹2,500 per Jeep. One private 4×4 Jeep accommodates up to 6–8 people (including driver). There are no additional per-person charges for your group.'
+    answer: 'The rate is flat ₹2,500 per Jeep. One private 4×4 Jeep accommodates up to 10 people (including driver). There are no additional per-person charges for your group.'
   },
   {
     id: 'f3',

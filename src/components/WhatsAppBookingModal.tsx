@@ -43,13 +43,13 @@ export const WhatsAppBookingModal: React.FC<WhatsAppBookingModalProps> = ({
     setPreferredDate(tomorrow.toISOString().split('T')[0]);
   }, []);
 
-  // Auto-adjust or warn if total guests exceed jeep capacity (8 persons per jeep)
+  // Auto-adjust or warn if total guests exceed jeep capacity (10 persons per jeep)
   useEffect(() => {
     const pCount = parseInt(persons, 10);
     if (!isNaN(pCount) && pCount > 0) {
-      const neededJeeps = Math.ceil(pCount / 8);
+      const neededJeeps = Math.ceil(pCount / 10);
       if (neededJeeps > jeepCount) {
-        setCapacityNotice(`Note: ${pCount} guests require ${neededJeeps} Jeep(s) (1 Jeep accommodates up to 8 people). We've updated your jeep count.`);
+        setCapacityNotice(`Note: ${pCount} guests require ${neededJeeps} Jeep(s) (1 Jeep accommodates up to 10 people). We've updated your jeep count.`);
         setJeepCount(neededJeeps);
       } else {
         setCapacityNotice('');
@@ -151,7 +151,7 @@ export const WhatsAppBookingModal: React.FC<WhatsAppBookingModalProps> = ({
 I would like to book the Jeep Safari & Hilltop Trek.
 
 Package: ${SINGLE_PACKAGE.name}
-Rate: ₹2,500 Per Jeep (6–8 People capacity)
+Rate: ₹2,500 Per Jeep (Up to 10 People capacity)
 Number of Jeeps: ${jeepCount}
 Total Amount: ₹${totalPrice.toLocaleString('en-IN')}
 
@@ -192,7 +192,7 @@ Please confirm availability and booking details.`;
               Book Your Jeep Adventure
             </h3>
             <p className="text-xs text-blue-100/90 mt-0.5 font-light">
-              ₹2,500 Per Private Jeep • Up to 6–8 People • Instant Confirmation
+              ₹2,500 Per Private Jeep • Up to 10 People • Instant Confirmation
             </p>
           </div>
 
@@ -266,16 +266,17 @@ Please confirm availability and booking details.`;
 
             <div>
               <label className="block text-xs font-heading font-bold text-gray-800 uppercase tracking-wider mb-1">
-                Phone Number <span className="text-rose-500">* (10 Digits)</span>
+                Phone Number <span className="text-rose-500">* (10 Digits Limit)</span>
               </label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => {
-                  setPhone(e.target.value);
+                  const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setPhone(cleaned);
                   if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
                 }}
-                maxLength={15}
+                maxLength={10}
                 placeholder="e.g. 9876543210"
                 required
                 className={`w-full px-3.5 py-2.5 bg-gray-50 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:bg-white ${
@@ -303,10 +304,10 @@ Please confirm availability and booking details.`;
                   onChange={(e) => setJeepCount(Number(e.target.value))}
                   className="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#0D47A1] focus:bg-white"
                 >
-                  <option value={1}>1 Jeep (Up to 8 people) — ₹2,500</option>
-                  <option value={2}>2 Jeeps (9 to 16 people) — ₹5,000</option>
-                  <option value={3}>3 Jeeps (17 to 24 people) — ₹7,500</option>
-                  <option value={4}>4 Jeeps (25+ people group) — ₹10,000</option>
+                  <option value={1}>1 Jeep (Up to 10 people) — ₹2,500</option>
+                  <option value={2}>2 Jeeps (11 to 20 people) — ₹5,000</option>
+                  <option value={3}>3 Jeeps (21 to 30 people) — ₹7,500</option>
+                  <option value={4}>4 Jeeps (31+ people group) — ₹10,000</option>
                 </select>
               </div>
             </div>

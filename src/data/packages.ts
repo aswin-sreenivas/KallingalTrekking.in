@@ -31,7 +31,7 @@ export const SINGLE_PACKAGE: TrekPackage = {
   tagline: 'Experience exciting 4x4 off-road trails through Banasura hills leading to stunning hilltop vistas.',
   duration: 'Approx. 1 Hour',
   pricePerJeep: 2500,
-  capacity: '6–8 People (including driver)',
+  capacity: 'Up to 10 People (including driver)',
   vehicle: 'Private 4×4 Jeep',
   route: '6 km Jeep Ride + 500 m Trek',
   pickupInfo: 'Free pickup within 8 km of starting point (extra charges apply beyond 8 km)',
@@ -92,7 +92,7 @@ export const KEY_HIGHLIGHTS: KeyHighlight[] = [
   {
     id: 'h7',
     title: 'Affordable Group Pricing',
-    description: 'Just ₹2,500 total for the entire Jeep carrying up to 6–8 people.',
+    description: 'Just ₹2,500 total for the entire Jeep carrying up to 10 people.',
     iconName: 'Tag'
   },
   {

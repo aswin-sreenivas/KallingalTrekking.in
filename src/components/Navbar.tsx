@@ -172,12 +172,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className={`font-heading font-extrabold text-base sm:text-lg tracking-tight uppercase leading-tight ${
                   isScrolled ? 'text-[#0D47A1]' : 'text-white'
                 }`}>
-                  Kallingal
+                  Kallingal Trekking
                 </span>
                 <span className={`text-[10px] uppercase font-semibold tracking-widest leading-none ${
                   isScrolled ? 'text-[#1565C0]' : 'text-blue-200'
                 }`}>
-                  Trekking Wayanad
+                  Wayanad
                 </span>
               </div>
             </a>

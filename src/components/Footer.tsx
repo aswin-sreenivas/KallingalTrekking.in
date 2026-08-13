@@ -62,11 +62,11 @@ export const Footer: React.FC<FooterProps> = ({
                 <Phone className="w-4 h-4" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/kallingaltrekking"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white transition-colors"
-                title="Follow on Instagram"
+                title="Follow on Instagram (@kallingaltrekking)"
               >
                 <Instagram className="w-4 h-4" />
               </a>
