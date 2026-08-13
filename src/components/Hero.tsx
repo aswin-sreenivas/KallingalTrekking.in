@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
         {/* Main Heading */}
         <h1 className="font-heading font-extrabold text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-tight sm:leading-[1.1] text-white drop-shadow-md max-w-4xl px-1">
-          Banasura Hills Views <span className="text-amber-400">Jeep Trekking</span> & Safari
+          Banasura Hills Views <span className="text-blue-300">Jeep Trekking</span> & Safari
         </h1>
 
         {/* Call to Action Button */}
