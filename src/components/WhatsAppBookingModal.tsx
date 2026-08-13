@@ -43,13 +43,13 @@ export const WhatsAppBookingModal: React.FC<WhatsAppBookingModalProps> = ({
     setPreferredDate(tomorrow.toISOString().split('T')[0]);
   }, []);
 
-  // Auto-adjust or warn if total guests exceed jeep capacity (10 persons per jeep)
+  // Auto-adjust or warn if total guests exceed jeep capacity (8 persons per jeep including driver)
   useEffect(() => {
     const pCount = parseInt(persons, 10);
     if (!isNaN(pCount) && pCount > 0) {
-      const neededJeeps = Math.ceil(pCount / 10);
+      const neededJeeps = Math.ceil(pCount / 7);
       if (neededJeeps > jeepCount) {
-        setCapacityNotice(`Note: ${pCount} guests require ${neededJeeps} Jeep(s) (1 Jeep accommodates up to 10 people). We've updated your jeep count.`);
+        setCapacityNotice(`Note: ${pCount} guests require ${neededJeeps} Jeep(s) (1 Jeep accommodates up to 8 persons including driver). We've updated your jeep count.`);
         setJeepCount(neededJeeps);
       } else {
         setCapacityNotice('');
@@ -151,7 +151,7 @@ export const WhatsAppBookingModal: React.FC<WhatsAppBookingModalProps> = ({
 I would like to book the Jeep Safari & Hilltop Trek.
 
 Package: ${SINGLE_PACKAGE.name}
-Rate: ₹2,500 Per Jeep (Up to 10 People capacity)
+Rate: ₹2,500 Per Jeep (1 Jeep: 8 persons capacity including driver)
 Number of Jeeps: ${jeepCount}
 Total Amount: ₹${totalPrice.toLocaleString('en-IN')}
 
@@ -192,7 +192,7 @@ Please confirm availability and booking details.`;
               Book Your Jeep Adventure
             </h3>
             <p className="text-xs text-blue-100/90 mt-0.5 font-light">
-              ₹2,500 Per Private Jeep • Up to 10 People • Instant Confirmation
+              ₹2,500 Per Private Jeep • 1 Jeep: 8 Persons (including driver) • Instant Confirmation
             </p>
           </div>
 
@@ -304,10 +304,10 @@ Please confirm availability and booking details.`;
                   onChange={(e) => setJeepCount(Number(e.target.value))}
                   className="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#0D47A1] focus:bg-white"
                 >
-                  <option value={1}>1 Jeep (Up to 10 people) — ₹2,500</option>
-                  <option value={2}>2 Jeeps (11 to 20 people) — ₹5,000</option>
-                  <option value={3}>3 Jeeps (21 to 30 people) — ₹7,500</option>
-                  <option value={4}>4 Jeeps (31+ people group) — ₹10,000</option>
+                  <option value={1}>1 Jeep (8 persons including driver) — ₹2,500</option>
+                  <option value={2}>2 Jeeps (16 persons total including drivers) — ₹5,000</option>
+                  <option value={3}>3 Jeeps (24 persons total including drivers) — ₹7,500</option>
+                  <option value={4}>4 Jeeps (25+ persons group) — ₹10,000</option>
                 </select>
               </div>
             </div>
